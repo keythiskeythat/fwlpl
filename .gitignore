@@ -1,0 +1,35 @@
+# ===== Java build =====
+*.class
+*.log
+*.jar
+*.war
+*.ear
+target/
+build/
+out/
+
+
+# (Nếu bạn muốn giữ file generate thì xóa mấy dòng trên)
+
+# ===== IDE =====
+.idea/
+*.iml
+.vscode/
+
+# ===== OS =====
+.DS_Store
+Thumbs.db
+
+# ===== Logs =====
+*.log
+
+# ===== Temp =====
+*.tmp
+*.swp
+
+# ===== Python (nếu bạn test ANTLR Python) =====
+__pycache__/
+*.pyc
+
+# ===== Environment =====
+.env
