@@ -12,7 +12,7 @@ import java.io.InputStream;
 public class Main {
     public static void main(String[] args) throws Exception {
 
-        InputStream is = Main.class.getClassLoader().getResourceAsStream("test.txt");
+        InputStream is = Main.class.getClassLoader().getResourceAsStream("fw_Code.bored");
 
         CharStream input = CharStreams.fromStream(is);
 
@@ -22,8 +22,7 @@ public class Main {
 
         ParseTree tree = parser.root();
 
-
-        FWBaseVisitor<String> visitor = new FWVisitorImpl();
+        FWBaseVisitor<Object> visitor = new FWVisitorImpl();
         visitor.visit(tree);
     }
 }

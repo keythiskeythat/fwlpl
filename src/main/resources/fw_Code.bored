@@ -1,0 +1,6 @@
+shit {
+    Tarot a = 1
+    Broom s = "Choi"
+    show(a)
+    show(s)
+}

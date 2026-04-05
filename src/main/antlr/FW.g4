@@ -10,13 +10,14 @@ mainFunction
 
 // ===== BLOCK =====
 block
-    : '{' statement* '}'
+    : '{' NEWLINE* statement* '}'
     ;
 
 // ===== STATEMENT =====
 statement
-    : variableDecl ';'
-    | assignment ';'
+    : variableDecl NEWLINE+
+    | assignment NEWLINE+
+    | printStatement NEWLINE+
     ;
 
 // ===== VARIABLE =====
@@ -30,8 +31,8 @@ assignment
 
 // ===== TYPE =====
 type
-    : 'num'
-    | 'Chổi'
+    : TAROT
+    | BROOM
     ;
 
 // ===== EXPRESSION =====
@@ -46,9 +47,18 @@ literal
     | STRING
     ;
 
+printStatement
+    : 'show' '(' expression ')'
+    ;
+
 // ===== LEXER =====
+TAROT: 'Tarot';
+BROOM: 'Broom';
+
 IDENTIFIER: [a-zA-Z_][a-zA-Z_0-9]*;
 INT: [0-9]+;
 STRING: '"' (~["\\] | '\\' .)* '"';
 
-WS: [ \t\r\n]+ -> skip;
+// 🔥 QUAN TRỌNG
+NEWLINE: '\r'? '\n';
+WS: [ \t]+ -> skip;

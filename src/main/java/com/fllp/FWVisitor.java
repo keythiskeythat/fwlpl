@@ -17,9 +17,57 @@ public interface FWVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitRoot(FWParser.RootContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link FWParser#command}.
+	 * Visit a parse tree produced by {@link FWParser#mainFunction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCommand(FWParser.CommandContext ctx);
+	T visitMainFunction(FWParser.MainFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FWParser#block}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBlock(FWParser.BlockContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FWParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatement(FWParser.StatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FWParser#variableDecl}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVariableDecl(FWParser.VariableDeclContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FWParser#assignment}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssignment(FWParser.AssignmentContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FWParser#type}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitType(FWParser.TypeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FWParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpression(FWParser.ExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FWParser#literal}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLiteral(FWParser.LiteralContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FWParser#printStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrintStatement(FWParser.PrintStatementContext ctx);
 }
