@@ -1,6 +1,6 @@
 # Bored Programming Language
 
-This is relaxed program language. 
+This is a relaxing language. Just to relax.
 
 Variable
 ```
