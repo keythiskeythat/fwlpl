@@ -88,6 +88,36 @@ public interface FWListener extends ParseTreeListener {
 	 */
 	void exitExpression(FWParser.ExpressionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link FWParser#comparison}.
+	 * @param ctx the parse tree
+	 */
+	void enterComparison(FWParser.ComparisonContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FWParser#comparison}.
+	 * @param ctx the parse tree
+	 */
+	void exitComparison(FWParser.ComparisonContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FWParser#addition}.
+	 * @param ctx the parse tree
+	 */
+	void enterAddition(FWParser.AdditionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FWParser#addition}.
+	 * @param ctx the parse tree
+	 */
+	void exitAddition(FWParser.AdditionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FWParser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrimary(FWParser.PrimaryContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FWParser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrimary(FWParser.PrimaryContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link FWParser#literal}.
 	 * @param ctx the parse tree
 	 */
@@ -107,4 +137,14 @@ public interface FWListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitPrintStatement(FWParser.PrintStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FWParser#loopStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoopStatement(FWParser.LoopStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FWParser#loopStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoopStatement(FWParser.LoopStatementContext ctx);
 }

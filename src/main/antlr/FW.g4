@@ -18,6 +18,7 @@ statement
     : variableDecl NEWLINE+
     | assignment NEWLINE+
     | printStatement NEWLINE+
+    | loopStatement NEWLINE+
     ;
 
 // ===== VARIABLE =====
@@ -31,14 +32,27 @@ assignment
 
 // ===== TYPE =====
 type
-    : TAROT
-    | BROOM
+    : DANM
+    | FRIGGING
     ;
 
 // ===== EXPRESSION =====
 expression
+    : comparison
+    ;
+
+comparison
+    : addition (('<' | '>' | '==') addition)*
+    ;
+
+addition
+    : primary (('+' | '-') primary)*
+    ;
+
+primary
     : literal
     | IDENTIFIER
+    | '(' expression ')'
     ;
 
 // ===== LITERAL =====
@@ -51,9 +65,13 @@ printStatement
     : 'show' '(' expression ')'
     ;
 
+loopStatement
+    : 'loop' '(' expression ')' block 'bug'
+    ;
+
 // ===== LEXER =====
-TAROT: 'Tarot';
-BROOM: 'Broom';
+DANM: 'Danm';
+FRIGGING: 'Frigging';
 
 IDENTIFIER: [a-zA-Z_][a-zA-Z_0-9]*;
 INT: [0-9]+;

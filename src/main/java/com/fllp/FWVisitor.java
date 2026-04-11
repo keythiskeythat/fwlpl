@@ -59,6 +59,24 @@ public interface FWVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpression(FWParser.ExpressionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link FWParser#comparison}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitComparison(FWParser.ComparisonContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FWParser#addition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAddition(FWParser.AdditionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FWParser#primary}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrimary(FWParser.PrimaryContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link FWParser#literal}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -70,4 +88,10 @@ public interface FWVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitPrintStatement(FWParser.PrintStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FWParser#loopStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLoopStatement(FWParser.LoopStatementContext ctx);
 }

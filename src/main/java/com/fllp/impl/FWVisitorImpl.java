@@ -42,8 +42,12 @@ public class FWVisitorImpl extends FWBaseVisitor<Object> {
             return visit(ctx.variableDecl()).toString();
         } else if (ctx.printStatement() != null) {
             return visit(ctx.printStatement()).toString();
-        } else {
+        } else if (ctx.assignment() != null) {
             return visit(ctx.assignment()).toString();
+        } else if (ctx.loopStatement() != null) {
+            return visit(ctx.loopStatement()).toString();
+        } else {
+            return "Unknown statement";
         }
     }
 
@@ -95,12 +99,74 @@ public class FWVisitorImpl extends FWBaseVisitor<Object> {
     // ===== EXPRESSION =====
     @Override
     public Object visitExpression(FWParser.ExpressionContext ctx) {
+        return visit(ctx.comparison());
+    }
+
+    // ===== COMPARISON =====
+    @Override
+    public Object visitComparison(FWParser.ComparisonContext ctx) {
+        Object left = visit(ctx.addition(0));
+        for (int i = 1; i < ctx.addition().size(); i++) {
+            String op = ctx.getChild(2 * i - 1).getText();
+            Object right = visit(ctx.addition(i));
+            if (op.equals("<")) {
+                if (left instanceof Integer && right instanceof Integer) {
+                    left = (Integer) left < (Integer) right;
+                } else {
+                    throw new RuntimeException("Invalid comparison: < requires integers");
+                }
+            } else if (op.equals(">")) {
+                if (left instanceof Integer && right instanceof Integer) {
+                    left = (Integer) left > (Integer) right;
+                } else {
+                    throw new RuntimeException("Invalid comparison: > requires integers");
+                }
+            } else if (op.equals("==")) {
+                left = left.equals(right);
+            }
+        }
+        return left;
+    }
+
+    // ===== ADDITION =====
+    @Override
+    public Object visitAddition(FWParser.AdditionContext ctx) {
+        Object left = visit(ctx.primary(0));
+        for (int i = 1; i < ctx.primary().size(); i++) {
+            String op = ctx.getChild(2 * i - 1).getText();
+            Object right = visit(ctx.primary(i));
+            if (op.equals("+")) {
+                if (left instanceof Integer && right instanceof Integer) {
+                    left = (Integer) left + (Integer) right;
+                } else {
+                    left = left.toString() + right.toString();
+                }
+            } else if (op.equals("-")) {
+                if (left instanceof Integer && right instanceof Integer) {
+                    left = (Integer) left - (Integer) right;
+                } else {
+                    throw new RuntimeException("Invalid subtraction: - requires integers");
+                }
+            }
+        }
+        return left;
+    }
+
+    // ===== PRIMARY =====
+    @Override
+    public Object visitPrimary(FWParser.PrimaryContext ctx) {
         if (ctx.literal() != null) {
             return visit(ctx.literal());
-        } else {
+        } else if (ctx.IDENTIFIER() != null) {
             String varName = ctx.IDENTIFIER().getText();
-            return memory.getOrDefault(varName, "undefined");
+            if (!memory.containsKey(varName)) {
+                throw new RuntimeException("Variable " + varName + " not declared");
+            }
+            return memory.get(varName);
+        } else if (ctx.expression() != null) {
+            return visit(ctx.expression());
         }
+        return null;
     }
 
     // ===== LITERAL =====
@@ -128,5 +194,42 @@ public class FWVisitorImpl extends FWBaseVisitor<Object> {
         System.out.println("[SHOW] " + value);
 
         return "[SHOW] " + value;
+    }
+
+    @Override
+    public Object visitLoopStatement(FWParser.LoopStatementContext ctx) {
+        StringBuilder result = new StringBuilder();
+        int iterations = 0;
+        final int MAX_ITERATIONS = 1000; // Prevent infinite loops
+
+        while (iterations < MAX_ITERATIONS) {
+            Object condition = visit(ctx.expression());
+            if (!isTruthy(condition)) {
+                break;
+            }
+            result.append(visit(ctx.block())).append("\n");
+            iterations++;
+        }
+
+        if (iterations >= MAX_ITERATIONS) {
+            result.append("Lỗi: Vòng lặp vượt quá số lần lặp tối đa\n");
+        }
+
+        return result.toString();
+    }
+
+    // Helper method to check if an object is truthy
+    private boolean isTruthy(Object obj) {
+        if (obj == null) return false;
+        if (obj instanceof Boolean) {
+            return (Boolean) obj;
+        }
+        if (obj instanceof Integer) {
+            return (Integer) obj != 0;
+        }
+        if (obj instanceof String) {
+            return !((String) obj).isEmpty();
+        }
+        return true; // Other types are considered true
     }
 }

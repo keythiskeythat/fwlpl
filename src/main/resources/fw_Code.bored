@@ -1,6 +1,11 @@
 shit {
-    Tarot a = 1
-    Broom s = "Choi"
+    Danm a = 1
+    Frigging s = "Choi"
     show(a)
     show(s)
+
+    loop ((a + a) < 10) {
+        a = a + 1
+        show(a)
+    } bug
 }
