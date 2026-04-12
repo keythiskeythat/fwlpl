@@ -180,6 +180,18 @@ public class FWBaseListener implements FWListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitLoopStatement(FWParser.LoopStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBreakStatement(FWParser.BreakStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBreakStatement(FWParser.BreakStatementContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

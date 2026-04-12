@@ -1,5 +1,6 @@
 // Generated from FW.g4 by ANTLR 4.13.2
 package com.fllp;
+import com.fllp.impl.BreakException;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -94,4 +95,10 @@ public interface FWVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitLoopStatement(FWParser.LoopStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FWParser#breakStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBreakStatement(FWParser.BreakStatementContext ctx) throws BreakException;
 }

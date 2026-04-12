@@ -147,4 +147,14 @@ public interface FWListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitLoopStatement(FWParser.LoopStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FWParser#breakStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterBreakStatement(FWParser.BreakStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FWParser#breakStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitBreakStatement(FWParser.BreakStatementContext ctx);
 }

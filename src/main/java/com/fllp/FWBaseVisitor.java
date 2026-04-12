@@ -1,5 +1,6 @@
 // Generated from FW.g4 by ANTLR 4.13.2
 package com.fllp;
+import com.fllp.impl.BreakException;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
@@ -110,4 +111,11 @@ public class FWBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements FWV
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitLoopStatement(FWParser.LoopStatementContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitBreakStatement(FWParser.BreakStatementContext ctx) throws BreakException { return visitChildren(ctx); }
 }

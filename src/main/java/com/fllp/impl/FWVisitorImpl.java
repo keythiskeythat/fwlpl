@@ -46,6 +46,8 @@ public class FWVisitorImpl extends FWBaseVisitor<Object> {
             return visit(ctx.assignment()).toString();
         } else if (ctx.loopStatement() != null) {
             return visit(ctx.loopStatement()).toString();
+        } else if (ctx.breakStatement() != null) {
+            return visit(ctx.breakStatement()).toString();
         } else {
             return "Unknown statement";
         }
@@ -64,17 +66,17 @@ public class FWVisitorImpl extends FWBaseVisitor<Object> {
         }
 
         // 🔥 VALIDATION Tarot
-        if (type.equals("Tarot")) {
-            if (!(value instanceof Integer)) {
-                return "Lỗi: Tarot phải là số";
-            }
-
-            int v = (Integer) value;
-
-            if (v < 1 || v > 78) {
-                return "Lỗi: Tarot chỉ nhận giá trị từ 1 đến 78";
-            }
-        }
+//        if (type.equals("Danm")) {
+//            if (!(value instanceof Integer)) {
+//                return "Lỗi: Tarot phải là số";
+//            }
+//
+//            int v = (Integer) value;
+//
+//            if (v < 1 || v > 78) {
+//                return "Lỗi: Tarot chỉ nhận giá trị từ 1 đến 78";
+//            }
+//        }
 
         memory.put(varName, value);
 
@@ -207,7 +209,13 @@ public class FWVisitorImpl extends FWBaseVisitor<Object> {
             if (!isTruthy(condition)) {
                 break;
             }
-            result.append(visit(ctx.block())).append("\n");
+
+            try {
+                result.append(visit(ctx.block())).append("\n");
+            } catch (BreakException e) {
+                break; // thoát loop
+            }
+
             iterations++;
         }
 
@@ -216,6 +224,11 @@ public class FWVisitorImpl extends FWBaseVisitor<Object> {
         }
 
         return result.toString();
+    }
+
+    @Override
+    public Object visitBreakStatement(FWParser.BreakStatementContext ctx) throws BreakException {
+        throw new BreakException();
     }
 
     // Helper method to check if an object is truthy

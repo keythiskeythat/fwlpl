@@ -1,4 +1,4 @@
 package com.fllp.impl;
 
-public class BreakException {
+public class BreakException extends RuntimeException  {
 }

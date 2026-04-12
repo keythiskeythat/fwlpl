@@ -1,11 +1,17 @@
 shit {
     Danm a = 1
-    Frigging s = "Choi"
+    Hell s = "Choi"
     show(a)
     show(s)
 
     loop ((a + a) < 10) {
         a = a + 1
         show(a)
+    } bug
+
+    a = 0
+    loop ((a + a) < 2) {
+        show(a)
+        Freaking
     } bug
 }
