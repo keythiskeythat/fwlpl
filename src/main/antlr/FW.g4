@@ -19,6 +19,7 @@ statement
     | assignment NEWLINE+
     | printStatement NEWLINE+
     | loopStatement NEWLINE+
+    | breakStatement NEWLINE+
     ;
 
 // ===== VARIABLE =====
@@ -33,7 +34,7 @@ assignment
 // ===== TYPE =====
 type
     : DANM
-    | FRIGGING
+    | HELL
     ;
 
 // ===== EXPRESSION =====
@@ -69,9 +70,14 @@ loopStatement
     : 'loop' '(' expression ')' block 'bug'
     ;
 
+breakStatement
+    : FREAKING
+    ;
+
 // ===== LEXER =====
 DANM: 'Danm';
-FRIGGING: 'Frigging';
+HELL: 'Hell';
+FREAKING: 'Freaking';
 
 IDENTIFIER: [a-zA-Z_][a-zA-Z_0-9]*;
 INT: [0-9]+;
